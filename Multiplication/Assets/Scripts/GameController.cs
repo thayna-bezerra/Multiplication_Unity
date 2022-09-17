@@ -44,8 +44,8 @@ public class GameController : MonoBehaviour
 
     void SortearNumeros()
     {
-        n1 = Random.Range(0, 5); //Gerar número aleatório e guardar na variável
-        n2 = Random.Range(0, 5);
+        n1 = Random.Range(0, 4); //Gerar número aleatório e guardar na variável
+        n2 = Random.Range(0, 2);
 
         imgN1.GetComponent<SpriteRenderer>().sprite = numeros[n1]; //Buscar número gerado pelo index dentro da lista
         imgN2.GetComponent<SpriteRenderer>().sprite = numeros[n2]; //Vai pegar a imagem correspondente ao número gerado de acordo com o index
