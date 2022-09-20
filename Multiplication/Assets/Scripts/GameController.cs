@@ -29,6 +29,8 @@ public class GameController : MonoBehaviour
     public int valorSorteado; //Último valor sorteado
     public int[] respostasErradas = new int[3]; //Guardar os 3 números gerados e verificar um a um dentro da lista
 
+
+
     private void Start()
     {
         SortearNumeros();
