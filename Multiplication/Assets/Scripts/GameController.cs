@@ -30,6 +30,24 @@ public class GameController : MonoBehaviour
     public int[] respostasErradas = new int[3]; //Guardar os 3 números gerados e verificar um a um dentro da lista
 
 
+    [Header("Variáveis de erros e acertos")]
+    public int totalAcertos;
+    public int totalErros;
+    public int totalContas;
+
+    public Text textAcertos;
+    public Text textErros;
+
+    private void Update()
+    {
+        textAcertos.text = totalAcertos.ToString();
+        textErros.text = totalErros.ToString();
+
+        totalContas = totalAcertos + totalErros;
+
+        if (totalContas >= 10) //DEPOIS DA ANIMAÇÃO DE ERRO OU ACERTO >> Se totalContas menor que ou igual a 10 -> chamar nova rodada // SENÃO chamar panel com todas as vars
+            Debug.Log("Completou as 10 questões - chamar a tela com o resumo das 10 questoes");
+    }
 
     private void Start()
     {

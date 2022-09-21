@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class CheckAnswer : MonoBehaviour
 {
-    [Header("Variáveis de erros e acertos")]
-    public int totalAcertos;
-    public int totalErros;
-    public int totalContas;
-
-    private void Update()
-    {
-        totalContas = totalAcertos + totalErros;
-    }
+    public GameController gc;
 
     void OnMouseDown()
     {
         if(gameObject.tag == "Resposta")
         {
-            totalErros++;
+            gc.totalAcertos++;
             Debug.Log("Essa é a resposta");
         }
-
+       
         if(gameObject.tag == "Errado")
         {
-            totalErros++;
+            gc.totalErros++;
             Debug.Log("Resposta ERRADA");
         }
     }
