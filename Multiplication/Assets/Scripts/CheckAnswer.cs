@@ -11,12 +11,14 @@ public class CheckAnswer : MonoBehaviour
         if(gameObject.tag == "Resposta")
         {
             gc.totalAcertos++;
+            gc.encontrouResposta = true;
             Debug.Log("Essa é a resposta");
         }
        
         if(gameObject.tag == "Errado")
         {
             gc.totalErros++;
+            gc.respostaErrada = true;
             Debug.Log("Resposta ERRADA");
         }
     }

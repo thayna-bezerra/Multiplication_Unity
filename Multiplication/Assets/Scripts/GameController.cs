@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public int n2;
     public int resultadoMult; //Resultado da Mult dado os numeros aleatorios
 
+    public bool encontrouResposta = false;
+    public bool respostaErrada = false;
+
     [Space(5)]
 
     [Header("Imagens correspondentes a cada número")]
@@ -64,8 +67,8 @@ public class GameController : MonoBehaviour
 
     void SortearNumeros()
     {
-        n1 = Random.Range(0, 4); //Gerar número aleatório e guardar na variável
-        n2 = Random.Range(0, 2);
+        n1 = Random.Range(0, 11); //Gerar número aleatório e guardar na variável
+        n2 = Random.Range(0, 11);
 
         imgN1.GetComponent<SpriteRenderer>().sprite = numeros[n1]; //Buscar número gerado pelo index dentro da lista
         imgN2.GetComponent<SpriteRenderer>().sprite = numeros[n2]; //Vai pegar a imagem correspondente ao número gerado de acordo com o index
@@ -83,7 +86,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i <= limiteNum - 1; i++)
         {
         Inicio:
-            valorSorteado = Random.Range(0, 9);
+            valorSorteado = Random.Range(0, 50);
 
             for (int x = 0; x <= limiteNum - 1; x++)
             {
