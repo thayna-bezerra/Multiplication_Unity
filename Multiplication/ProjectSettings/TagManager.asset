@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Resposta
-  - Errado
+  - Errado/1
+  - Errado/2
+  - Errado/3
   layers:
   - Default
   - TransparentFX

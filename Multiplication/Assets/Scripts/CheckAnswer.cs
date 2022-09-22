@@ -12,14 +12,30 @@ public class CheckAnswer : MonoBehaviour
         {
             gc.totalAcertos++;
             gc.encontrouResposta = true;
-            Debug.Log("Essa é a resposta");
         }
        
-        if(gameObject.tag == "Errado")
+        if(gameObject.tag == "Errado/1")
         {
             gc.totalErros++;
             gc.respostaErrada = true;
-            Debug.Log("Resposta ERRADA");
+
+            gc.num3.Play("errorAnim");
+        }
+
+        if(gameObject.tag == "Errado/2")
+        {
+            gc.totalErros++;
+            gc.respostaErrada = true;
+
+            gc.num4.Play("errorAnim2");
+        }
+
+        if(gameObject.tag == "Errado/3")
+        {
+            gc.totalErros++;
+            gc.respostaErrada = true;
+
+            gc.num5.Play("errorAnim3");
         }
     }
 }

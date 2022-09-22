@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     public SpriteRenderer imgResposta;
     public SpriteRenderer imgN3, imgN4, imgN5; //Imagens para as respostas incorretas
 
+    public Animator num3, num4, num5;
+
     [Space(5)]
 
     [Header("Lista com todas as sprites de NÚMEROS")]
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+
         SortearNumeros();
         MultiplicarNumeros(n1, n2);
 
