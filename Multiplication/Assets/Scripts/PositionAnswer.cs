@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PositionAnswer : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class PositionAnswer : MonoBehaviour
     private Renderer _renderer; 
     private Color32 _newColor = new Color32(144,238,144, 255);
 
-    //public Controle controle;
+    public Collider2D n1, n2, n3, n4;
 
-    private void Awake()
+    private void Start()
     {
         _renderer = GetComponent<Renderer>();
     }
@@ -23,28 +24,14 @@ public class PositionAnswer : MonoBehaviour
     {
         if (gc.encontrouResposta == true)
         {
+            n1.enabled = false;
+            n2.enabled = false;
+            n3.enabled = false;
+            n4.enabled = false;
+
             _renderer.material.color = _newColor;
             transform.position = Vector3.Lerp(transform.position, destination.position, velocity * Time.deltaTime); //Velocidade multiplicado por 0.02 segundos (deltaTime padrão)
             transform.localScale = new Vector3(0.75864f, 0.75864f, 0.75864f);
-
-            StartCoroutine(espera());
-
-            
-            //transform.localScale = Vector3.Lerp(transform.localScale, newScale.Scale, velocity * Time.deltaTime);
-
-            //this.transform.localScale = new Vector3(0.75864f, 0.75864f, 0.75864f) * Time.deltaTime;
-
-            //scaleChange = new Vector3(-0.01f, -0.01f, -0.01f);
-            //StartCoroutine(chamaPanel()); //essperar tempo ate chamar nova rodada
-            //controle.jogoPausado();
         }
-    }
-
-    IEnumerator espera()
-    {
-        yield return new WaitForSeconds(2f);
-
-        //chamar nova rodada
-        //panelAcertou.SetActive(true); //chamar animação de panel
     }
 }

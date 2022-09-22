@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
     public Text textAcertos;
     public Text textErros;
 
+    
+
     private void Update()
     {
         textAcertos.text = totalAcertos.ToString();
@@ -50,12 +52,20 @@ public class GameController : MonoBehaviour
 
         totalContas = totalAcertos + totalErros;
 
-        if (totalContas >= 10) //DEPOIS DA ANIMAÇÃO DE ERRO OU ACERTO >> Se totalContas menor que ou igual a 10 -> chamar nova rodada // SENÃO chamar panel com todas as vars
-            Debug.Log("Completou as 10 questões - chamar a tela com o resumo das 10 questoes");
+
+        if (encontrouResposta == true) // || totalContas <= 10) //Se totalContas menor que ou igual a 10 -> chamar nova rodada
+        {
+            //if(totalContas<=10)
+                StartCoroutine(espera());
+        }
+        else { } //completou as 10 >> chamar panel final com todas as vars
+
     }
 
     private void Start()
     {
+        totalAcertos = PlayerPrefs.GetInt("Acertos");
+        totalErros = PlayerPrefs.GetInt("Erros");
 
         SortearNumeros();
         MultiplicarNumeros(n1, n2);
@@ -102,5 +112,13 @@ public class GameController : MonoBehaviour
 
             respostasErradas[i] = valorSorteado;
         }
+    }
+
+    IEnumerator espera()
+    {
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name); //chamar nova rodada
     }
 }

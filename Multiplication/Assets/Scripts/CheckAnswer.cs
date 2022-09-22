@@ -6,12 +6,18 @@ public class CheckAnswer : MonoBehaviour
 {
     public GameController gc;
 
+    private void Start()
+    {
+    }
+
     void OnMouseDown()
     {
         if(gameObject.tag == "Resposta")
         {
             gc.totalAcertos++;
             gc.encontrouResposta = true;
+
+            PlayerPrefs.SetInt("Acertos", gc.totalAcertos);
         }
        
         if(gameObject.tag == "Errado/1")
@@ -20,6 +26,8 @@ public class CheckAnswer : MonoBehaviour
             gc.respostaErrada = true;
 
             gc.num3.Play("errorAnim");
+            
+            PlayerPrefs.SetInt("Erros", gc.totalErros);
         }
 
         if(gameObject.tag == "Errado/2")

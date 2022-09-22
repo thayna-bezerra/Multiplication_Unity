@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    public void repeatRound()
+    public void deletarVars()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        PlayerPrefs.DeleteAll();
     }
 }
