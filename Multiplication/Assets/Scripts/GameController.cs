@@ -27,13 +27,16 @@ public class GameController : MonoBehaviour
     [Space(5)]
 
     [Header("Lista com todas as sprites de NÚMEROS")]
-    public List<Sprite> numeros = new List<Sprite>(); 
+    public List<Sprite> numeros = new List<Sprite>();
+
+    [Space(5)]
 
     [Header("Opções de Resultado ERRADO")]
     public int limiteNum = 3; //Limite para sortear até 3 números
     public int valorSorteado; //Último valor sorteado
     public int[] respostasErradas = new int[3]; //Guardar os 3 números gerados e verificar um a um dentro da lista
 
+    [Space(5)]
 
     [Header("Variáveis de erros e acertos")]
     public int totalAcertos;
@@ -43,10 +46,48 @@ public class GameController : MonoBehaviour
     public Text textAcertos;
     public Text textErros;
 
-    
+    [Space(5)]
+
+    [Header("Contador de Tempo")]
+    public Text secondsTxt;
+    public Text minutesTxt;
+
+    public int limiteDosSegundos;
+    public float seconds;
+    public int minutes;
+
+    private void Start()
+    {
+        SortearNumeros();
+        MultiplicarNumeros(n1, n2);
+
+        GeradorDeRespostasErradas();
+
+        imgN3.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[0]];
+        imgN4.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[1]];
+        imgN5.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[2]];
+
+    }
+
+    private void FixedUpdate()
+    {
+        ContadorDeTempo();
+
+    }
+
+    private void Awake()
+    {
+        minutes = PlayerPrefs.GetInt("MinutesTime");
+        seconds = PlayerPrefs.GetFloat("SecondsTime");
+        
+    }
 
     private void Update()
     {
+        totalAcertos = PlayerPrefs.GetInt("Acertos");
+        totalErros = PlayerPrefs.GetInt("Erros");
+
+
         textAcertos.text = totalAcertos.ToString();
         textErros.text = totalErros.ToString();
 
@@ -56,25 +97,9 @@ public class GameController : MonoBehaviour
         if (encontrouResposta == true) // || totalContas <= 10) //Se totalContas menor que ou igual a 10 -> chamar nova rodada
         {
             //if(totalContas<=10)
-                StartCoroutine(espera());
+                StartCoroutine(ChamarNovaRodada());
         }
         else { } //completou as 10 >> chamar panel final com todas as vars
-
-    }
-
-    private void Start()
-    {
-        totalAcertos = PlayerPrefs.GetInt("Acertos");
-        totalErros = PlayerPrefs.GetInt("Erros");
-
-        SortearNumeros();
-        MultiplicarNumeros(n1, n2);
-
-        GeradorDeRespostasErradas();
-
-        imgN3.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[0]];
-        imgN4.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[1]];
-        imgN5.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[2]];
 
     }
 
@@ -92,7 +117,6 @@ public class GameController : MonoBehaviour
         resultadoMult = N1 * N2;
         imgResposta.GetComponent<SpriteRenderer>().sprite = numeros[resultadoMult];
     }
-
 
     void GeradorDeRespostasErradas()
     {
@@ -114,11 +138,27 @@ public class GameController : MonoBehaviour
         }
     }
 
-    IEnumerator espera()
+    IEnumerator ChamarNovaRodada()
     {
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("SampleScene");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name); //chamar nova rodada
     }
+
+    void ContadorDeTempo()
+    {
+        secondsTxt.text = seconds.ToString("00");
+        minutesTxt.text = minutes.ToString("00");
+
+        seconds += Time.deltaTime;
+        if (seconds >= limiteDosSegundos)
+        {
+            minutes++;
+            seconds = 0 + 1;
+        }
+
+        PlayerPrefs.SetInt("MinutesTime", minutes);
+        PlayerPrefs.SetFloat("SecondsTime", seconds);
+    }
+
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    public void deletarVars()
+    public void deletarSaves()
     {
         PlayerPrefs.DeleteAll();
     }

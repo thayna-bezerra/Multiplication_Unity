@@ -36,6 +36,8 @@ public class CheckAnswer : MonoBehaviour
             gc.respostaErrada = true;
 
             gc.num4.Play("errorAnim2");
+
+            PlayerPrefs.SetInt("Erros", gc.totalErros);
         }
 
         if(gameObject.tag == "Errado/3")
@@ -44,6 +46,8 @@ public class CheckAnswer : MonoBehaviour
             gc.respostaErrada = true;
 
             gc.num5.Play("errorAnim3");
+
+            PlayerPrefs.SetInt("Erros", gc.totalErros);
         }
     }
 }
