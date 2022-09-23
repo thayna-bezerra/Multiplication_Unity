@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    public void deletarSaves()
+    public void repetirRodada()
     {
         PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("SampleScene");
     }
+
 }

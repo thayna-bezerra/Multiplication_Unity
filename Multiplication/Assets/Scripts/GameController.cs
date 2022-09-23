@@ -56,8 +56,22 @@ public class GameController : MonoBehaviour
     public float seconds;
     public int minutes;
 
+    public bool stopTime = false;
+
+    [Space(5)]
+
+    [Header("Panel Final")]
+
+    public GameObject panelFinal;
+    public Text acertosPanel;
+    public Text errosPanel;
+    public Text minutesPanel;
+    public Text secondsPanel;
+
     private void Start()
     {
+        panelFinal.SetActive(false);
+
         SortearNumeros();
         MultiplicarNumeros(n1, n2);
 
@@ -66,20 +80,20 @@ public class GameController : MonoBehaviour
         imgN3.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[0]];
         imgN4.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[1]];
         imgN5.GetComponent<SpriteRenderer>().sprite = numeros[respostasErradas[2]];
-
     }
 
     private void FixedUpdate()
     {
-        ContadorDeTempo();
-
+        if(stopTime == false)
+        {
+            ContadorDeTempo();
+        }
     }
 
     private void Awake()
     {
         minutes = PlayerPrefs.GetInt("MinutesTime");
         seconds = PlayerPrefs.GetFloat("SecondsTime");
-        
     }
 
     private void Update()
@@ -87,19 +101,16 @@ public class GameController : MonoBehaviour
         totalAcertos = PlayerPrefs.GetInt("Acertos");
         totalErros = PlayerPrefs.GetInt("Erros");
 
-
         textAcertos.text = totalAcertos.ToString();
         textErros.text = totalErros.ToString();
 
         totalContas = totalAcertos + totalErros;
 
+        if (encontrouResposta == true && totalContas<=10)
+            StartCoroutine(ChamarNovaRodada());
 
-        if (encontrouResposta == true) // || totalContas <= 10) //Se totalContas menor que ou igual a 10 -> chamar nova rodada
-        {
-            //if(totalContas<=10)
-                StartCoroutine(ChamarNovaRodada());
-        }
-        else { } //completou as 10 >> chamar panel final com todas as vars
+        else if(totalContas>=10)
+            ChamaPanel();
 
     }
 
@@ -159,6 +170,18 @@ public class GameController : MonoBehaviour
 
         PlayerPrefs.SetInt("MinutesTime", minutes);
         PlayerPrefs.SetFloat("SecondsTime", seconds);
+    }
+
+    void ChamaPanel()
+    {
+        stopTime = true;
+        panelFinal.SetActive(true);
+
+        acertosPanel.text = totalAcertos.ToString();
+        errosPanel.text = totalErros.ToString();
+
+        secondsPanel.text = seconds.ToString("00");
+        minutesPanel.text = minutes.ToString("00");
     }
 
 }
