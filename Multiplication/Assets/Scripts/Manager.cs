@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
+    public void home()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     public void repetirRodada()
     {
         PlayerPrefs.DeleteAll();

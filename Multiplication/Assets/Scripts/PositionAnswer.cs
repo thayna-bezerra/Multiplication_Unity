@@ -31,7 +31,7 @@ public class PositionAnswer : MonoBehaviour
 
             _renderer.material.color = _newColor;
             transform.position = Vector3.Lerp(transform.position, destination.position, velocity * Time.deltaTime); //Velocidade multiplicado por 0.02 segundos (deltaTime padrão)
-            transform.localScale = new Vector3(0.75864f, 0.75864f, 0.75864f);
+            transform.localScale = new Vector3(0.55245f, 0.55245f, 0.55245f);
         }
     }
 }
